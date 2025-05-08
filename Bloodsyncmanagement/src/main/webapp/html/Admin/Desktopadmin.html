@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+</head>
+<body>
+    <div class="bg-red-600 text-white py-2 pb-5 px-3 ">
+        <div class="text-center text-3xl font-bold font-sans p-3">Admin Dashboard</div>
+        <div class=" duration-300 font-bold text-center flex gap-10 justify-center">
+            <a class="hover:text-red-300 " href="ManageDonorTable.html">Manage Donors</a>
+            <a class="hover:text-red-300 " href="RequestTable.html">Blood Requests</a>
+            <a class="hover:text-red-300 " href="BloodStockTable.html">Blood Stock</a>
+            <a class="hover:text-red-300 " href="../index.html">Logout</a>
+        </div>
+    </div>
+    <div class="flex items-center justify-center gap-4 h-[30vh] ">
+        <div class="px-6 text-center text-lg rounded-sm py-3 w-1/5 bg-red-500 text-white font-bold ">
+            <div>Total Donors</div>
+            <div id="totaldonor">Loading...</div>
+        </div>
+        <div class="px-6 text-center text-lg rounded-sm py-3 w-1/5 bg-red-500 text-white font-bold ">
+            <div>Pending Blood Requests</div>
+            <div id="totalrequest">Loading...</div>
+        </div>
+        <div class="px-6 text-center text-lg rounded-sm py-3 w-1/5 bg-red-500 text-white font-bold ">
+            <div>Blood Stock Available</div>
+            <div id="totalstock">Loading...</div>
+        </div>
+    </div>
+    
+ <script>
+ 
+ window.onload = showdata;
+ async function showdata() {
+	  try {
+	    let response = await fetch("http://localhost:2025/Bloodsyncmanagement/AdminRecord");
+
+	    if (!response.ok) {
+	      throw new Error(`HTTP error! Status: ${response.status}`);
+	    }
+
+	    let data = await response.json();
+	    
+	    setTimeout(()=>{
+
+	    	document.getElementById("totaldonor").innerText = data.totalDonor;
+		    document.getElementById("totalrequest").innerText = data.totalRequest;
+		    document.getElementById("totalstock").innerText = data.totalStock;
+		    
+	    },1000)
+	    
+       
+	  } catch (error) {
+	    
+	    document.getElementById("totaldonor").innerText = "Data Not Found";
+	    document.getElementById("totalrequest").innerText = "Data Not Found";
+	    document.getElementById("totalstock").innerText = "Data Not Found";
+	  }
+	}
+     </script> 
+ 
+   
+    
+</body>
+</html>

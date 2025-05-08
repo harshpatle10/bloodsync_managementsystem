@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    
+    <style>
+        .rowclass{
+        height: 50px;
+        color: black;
+        margin-bottom: 10px;
+        
+        }
+        .rowclass:hover{
+            background-color: rgb(244, 242, 242);
+        }
+        </style>
+        </head>
+<body>
+    <div class="bg-cyan-800 text-white py-2 pb-5 px-3 ">
+        <div class="text-center text-3xl font-bold font-sans p-3">Blood Stock</div>
+        <div class=" duration-300 font-bold text-center flex gap-10 justify-center">
+            <a class="hover:text-red-300 " href="Desktopadmin.html">Dashboard</a>
+            <a class="hover:text-red-300 " href="ManageDonorTable.html">Manage Donors</a>
+            <a class="hover:text-red-300 " href="RequestTable.html">Blood Requests</a>
+            <a class="hover:text-red-300 " href="../index.html">Logout</a>
+        </div>
+    </div>
+
+    <div class="py-4 px-30">
+        <div class="text-center text-3xl font-bold font-sans py-8">Available Blood Stock</div>
+        <table class="w-full bg-gray-200  h-100vh ">
+            <thead class=" h-10 bg-gray-800  text-white"> 
+                <tr>
+                    <th>Blood Type</th>
+                    <th>Available Units</th>
+                    <th>Donated Units</th>
+                    <th>Total Units</th>
+                                    </tr>
+            </thead>
+            
+            <tbody  id="bodydata" >
+              <tr><td colspan="7" class="h-4 bg-white"></td></tr>
+ 
+            </tbody>
+        </table>
+    </div>
+    
+    <script>
+    
+    
+      window.onload=datashow;
+       async  function datashow(){
+     	  let bodydata = document.getElementById("bodydata");
+    	  try {
+    		    let response = await fetch("http://localhost:2025/Bloodsyncmanagement/BloodStockListServlet");
+
+    		    if (!response.ok) {
+    		      throw new Error(`HTTP error! Status: ${response.status}`);
+    		    }
+
+    		    let responcedata = await response.json();
+    		    let datalist = responcedata.allStockList;
+                 
+    		    setTimeout(()=>{
+    		    	datalist.forEach((stock)=>{
+    		    		
+    		    	     let row = document.createElement("tr");
+    		    	     row.classList.add("rowclass");
+
+    		    	     row.innerHTML = `
+    		                
+    		    	          <td class=" text-center">${stock.bloodType}</td>
+    		    	          <td class=" text-center">${stock.availableUnits}</td>
+    		    	          <td class=" text-center">${stock.donatedUnits}</td>
+    		    	          <td class=" text-center">${stock.totalUnits}</td>
+    		    	          
+              
+    		    	        `;
+    		    	        bodydata.appendChild(row);   
+    			    
+    		    })
+    		    },500)
+    		    
+    	       
+    	 } catch (error) {
+    		 bodydata.innerText="error";
+    		
+     }
+    		
+      }
+    </script>
+   
+</body>
+</html>

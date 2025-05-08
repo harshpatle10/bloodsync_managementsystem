@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    
+    <style>
+        .rowclass{
+        height: 50px;
+        color: black;
+        margin-bottom: 10px;
+        
+        }
+        .rowclass:hover{
+            background-color: rgb(244, 242, 242);
+        }
+        </style>
+        </head>
+<body>
+    <div class="bg-cyan-800 text-white py-2 pb-5 px-3 ">
+        <div class="text-center text-3xl font-bold font-sans p-3">Manage Blood Request</div>
+        <div class=" duration-300 font-bold text-center flex gap-10 justify-center">
+            <a class="hover:text-red-300 " href="Desktopadmin.html">Dashboard</a>
+            <a class="hover:text-red-300 " href="ManageDonorTable.html">Manage Donors</a>
+            <a class="hover:text-red-300 " href="BloodStockTable.html">Blood Stock</a>
+            <a class="hover:text-red-300 " href="../index.html">Logout</a>
+        </div>
+    </div>
+
+    <div class="py-4 px-30">
+        <div class="text-center text-3xl font-bold font-sans py-8">All Blood Requests</div>
+        <table class="w-full bg-gray-200  h-100vh ">
+            <thead class=" h-10 bg-gray-800  text-white"> 
+                <tr>
+                    <th>ID</th>
+                    <th>Hospital Name</th>
+                    <th>Blood Type</th>
+                    <th>Urgency</th>
+                    <th>Status</th>
+                    <th>Requested Units</th>
+                    <th>Request Date</th>
+                </tr>
+            </thead>
+            
+            <tbody  id="bodydata" >
+              <tr><td colspan="7" class="h-4 bg-white"></td></tr>
+ 
+            </tbody>
+        </table>
+    </div>
+    
+    <script>
+    
+    
+      window.onload=datashow;
+       async  function datashow(){
+     	  let bodydata = document.getElementById("bodydata");
+    	  try {
+    		    let response = await fetch("http://localhost:2025/Bloodsyncmanagement/HospitalRequestListServlet");
+
+    		    if (!response.ok) {
+    		      throw new Error(`HTTP error! Status: ${response.status}`);
+    		    }
+
+    		    let responcedata = await response.json();
+    		    let datalist = responcedata.allRequestList;
+                 
+    		    setTimeout(()=>{
+    		    	datalist.forEach((hos)=>{
+    		    		
+    		    	     let row = document.createElement("tr");
+    		    	     row.classList.add("rowclass");
+
+    		    	     row.innerHTML = `
+    		                
+    		    	          <td class=" text-center">${hos.requestId}</td>
+    		    	          <td class=" text-center">${hos.HospitalName}</td>
+    		    	          <td class=" text-center">${hos.bloodType}</td>
+    		    	          <td class=" text-center">${hos.urgency}</td>
+    		    	          <td class=" text-center">${hos.requestedUnits}</td>
+    		    	          <td class=" text-center">${hos.requestDate}</td>
+    		    	          <td class=" text-center">${hos.status}</td>
+              
+    		    	        `;
+    		    	        bodydata.appendChild(row);   
+    			    
+    		    })
+    		    },500)
+    		    
+    	       
+    	 } catch (error) {
+    		 bodydata.innerText="error";
+    		
+     }
+    		
+      }
+    </script>
+   
+</body>
+</html>

@@ -1,0 +1,112 @@
+<web-app>
+  <listener>
+  	 <listener-class>in.bloodsync.dbutil.DBListener</listener-class>
+  </listener>
+  <context-param>
+  	<param-name>url</param-name>
+  	<param-value>jdbc:mysql://localhost:3306/bloodsync2</param-value>
+  </context-param>
+  <context-param>
+    <param-name>username</param-name>
+    <param-value>root</param-value>
+  </context-param>
+  <context-param>
+  	<param-name>password</param-name>
+  	<param-value>harsh@123</param-value>
+  </context-param>
+
+
+  <servlet>
+  	<servlet-name>DonorRegisterServlet</servlet-name>
+  	<servlet-class>in.bloodsync.servlet.DonorRegisterServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>DonorRegisterServlet</servlet-name>
+  	<url-pattern>/DonorRegisterServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>HospitalRegisterServlet</servlet-name>
+  	<servlet-class>in.bloodsync.servlet.HospitalRegisterServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>HospitalRegisterServlet</servlet-name>
+  	<url-pattern>/HospitalRegisterServlet</url-pattern>
+  </servlet-mapping>
+  
+  
+  <servlet>
+   <init-param>
+   <param-name>adminemail</param-name>
+   <param-value>harshpatle99999@gmail.com</param-value>
+   </init-param>
+   
+   <init-param>
+   <param-name>adminpass</param-name>
+   <param-value>harsh@123</param-value>
+   </init-param>
+   
+  <servlet-name>AdminLoginServlet</servlet-name>
+  <servlet-class>in.bloodsync.servlet.AdminLoginServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>AdminLoginServlet</servlet-name>
+  <url-pattern>/AdminLoginServlet</url-pattern>
+  </servlet-mapping>
+  
+  
+  <servlet>
+   <servlet-name>AdminRecord</servlet-name>
+  <servlet-class>in.bloodsync.api.AdminRecord</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  <servlet-name>AdminRecord</servlet-name>
+  <url-pattern>/AdminRecord</url-pattern>
+  </servlet-mapping>
+  
+  
+  
+  
+  <servlet>
+   <servlet-name>DonorListServlet</servlet-name>
+  <servlet-class>in.bloodsync.api.DonorListServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>DonorListServlet</servlet-name>
+  <url-pattern>/DonorListServlet</url-pattern>
+  </servlet-mapping>
+  
+  
+  
+  <servlet>
+   <servlet-name>HospitalRequestListServlet</servlet-name>
+  <servlet-class>in.bloodsync.api.HospitalRequestListServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>HospitalRequestListServlet</servlet-name>
+  <url-pattern>/HospitalRequestListServlet</url-pattern>
+  </servlet-mapping>
+  
+  
+  
+  <servlet>
+   <servlet-name>BloodStockListServlet</servlet-name>
+  <servlet-class>in.bloodsync.api.BloodStockListServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>BloodStockListServlet</servlet-name>
+  <url-pattern>/BloodStockListServlet</url-pattern>
+  </servlet-mapping>
+  
+  
+  <servlet>
+   <servlet-name>DonorEmail</servlet-name>
+  <servlet-class>in.bloodsync.email.DonorEmail</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>DonorEmail</servlet-name>
+  <url-pattern>/DonorEmail</url-pattern>
+  </servlet-mapping>
+  
+</web-app>

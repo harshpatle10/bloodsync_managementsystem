@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hospital Request</title>
+    <link rel="stylesheet" href="../../css/style.css" />
+    <script src="../../Javascript/validate/hospital_request.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>Hospital Request</h1>
+    </header>
+    <section class="form-container">
+      <form
+        action="../../HospitalRegisterServlet"
+        method="post"
+        onsubmit="return validateForm()"
+      >
+        <label for="hospital_name">Hospital Name:</label>
+        <input  type="text" name="hospital_name" id="hospital_name" required />
+        <label for="blood_type"> Required Blood Type:</label>
+        <select name="blood_type" id="blood_type">
+          <option value="A+">A+</option>
+          <option value="A-">A-</option>
+          <option value="B+">B+</option>
+          <option value="B-">B-</option>
+          <option value="O+">O+</option>
+          <option value="O-">O-</option>
+          <option value="AB+">AB+</option>
+          <option value="AB-"></option>
+        </select>
+        <label for="blood_units">Blood Units:</label>
+        <input type="number" name="blood_units" id="blood_units" required />
+        <label for="urgency">Urgency Level:</label>
+        <select name="urgency" id="urgency">
+          <option value="Low">Low</option>
+          <option value="Medium">Medium</option>
+          <option value="High">High</option>
+        </select>
+        <button type="submit">Submit Request</button>
+      </form>
+    </section>
+    <footer>
+      <p>&copy; 2025 BloodSync | All Rights Reserved</p>
+    </footer>
+  </body>
+</html>
